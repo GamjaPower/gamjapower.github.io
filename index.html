@@ -1,1 +1,620 @@
-GamjaPower Pages
+
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>ELK 셋팅부터 알람까지 - 우아한형제들 기술 블로그</title>
+  <meta name="description" content="  안녕하세요. 저는 상품시스템팀에서 개발업무를 맡고 있는 이중석입니다.최근 팀 내에서 로그엔트리를 ELK 로 전환하고 필요한 알람을 셋팅하는 작업을 진행했습니다. 이 과정중 알람을 설정하는 부분이 어렵진 않지만 쉽지도 않았습니다.그 과정에서 알게된 것들이 다른분께 도움이 될까 싶...">
+
+  <meta property="fb:pages" content="1012405502198937" />
+  <meta property="fb:app_id" content="596588250503455"/>
+  <meta property="og:title" content="ELK 셋팅부터 알람까지 - 우아한형제들 기술 블로그"/>
+  <meta property="og:site_name" content="우아한형제들 기술 블로그"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://woowabros.github.io/experience/2020/01/16/set-elk-with-alarm.html"/>
+  <meta property="og:image" content=""/>
+  <meta property="og:description" content="  안녕하세요. 저는 상품시스템팀에서 개발업무를 맡고 있는 이중석입니다.최근 팀 내에서 로그엔트리를 ELK 로 전환하고 필요한 알람을 셋팅하는 작업을 진행했습니다. 이 과정중 알람을 설정하는 부분이 어렵진 않지만 쉽지도 않았습니다.그 과정에서 알게된 것들이 다른분께 도움이 될까 싶..."/>
+  <meta name="naver-site-verification" content="9b6a9f890dc78f921d5c4b87fdb6ceaaf5549a17" />
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://woowabros.github.io/experience/2020/01/16/set-elk-with-alarm.html">
+  <link rel="alternate" type="application/rss+xml" title="우아한형제들 기술 블로그" href="https://woowabros.github.io/feed.xml">
+  <link rel="shortcut icon" href="https://www.woowahan.com/wp-content/uploads/2015/04/woowahan_favicon.ico">
+  <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+
+
+  <body>
+
+    
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.6&appId=596588250503455";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">
+      <span class="site-logo">우아한형제들</span>
+      <span class="site-title">기술 블로그</span>
+    </a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+      
+        
+        
+        
+        <li>
+          <a class="page-link" href="/category/interview">
+            interview (1)
+          </a>
+        </li>
+      
+        
+        
+        
+        <li>
+          <a class="page-link" href="/category/tools">
+            tools (23)
+          </a>
+        </li>
+      
+        
+        
+        
+        <li>
+          <a class="page-link" href="/category/nerd">
+            nerd (1)
+          </a>
+        </li>
+      
+        
+        
+        
+        <li>
+          <a class="page-link" href="/category/woowabros">
+            woowabros (35)
+          </a>
+        </li>
+      
+        
+        
+        
+        <li>
+          <a class="page-link" href="/category/study">
+            study (15)
+          </a>
+        </li>
+      
+        
+        
+        
+        <li>
+          <a class="page-link" href="/category/experience">
+            experience (98)
+          </a>
+        </li>
+      
+        
+        
+        
+        <li>
+          <a class="page-link" href="/category/r-d">
+            R&D (1)
+          </a>
+        </li>
+      
+        
+        
+        
+        <li>
+          <a class="page-link" href="/category/security">
+            security (5)
+          </a>
+        </li>
+      
+        
+        
+        
+        <li>
+          <a class="page-link" href="/category/swift">
+            swift (2)
+          </a>
+        </li>
+      
+        
+        
+        
+        <li>
+          <a class="page-link" href="/category/r-d">
+            r-d (2)
+          </a>
+        </li>
+      
+        
+        
+        
+        <li>
+          <a class="page-link" href="/category/techcourse">
+            techcourse (12)
+          </a>
+        </li>
+      
+        
+        
+        
+        <li>
+          <a class="page-link" href="/category/devrel">
+            devrel (1)
+          </a>
+        </li>
+      
+        <a class="page-link" href="http://woowabros.github.com">Github</a>
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <section class="content-layout">
+	<article class="post" itemscope itemtype="https://schema.org/BlogPosting">
+	  <meta itemscope itemprop="mainEntityOfPage"  itemType="https://schema.org/WebPage" itemid="https://woowabros.github.io"/>
+
+      <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+        <meta itemprop="url" content="">
+        <meta itemprop="width" content="800">
+        <meta itemprop="height" content="800">
+      </div>
+
+      <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+        <meta itemprop="name" content="우아한형제들">
+        <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+          <meta itemprop="url" content="https://woowabros.github.io/logo_220x57.png">
+          <meta itemprop="width" content="220">
+          <meta itemprop="height" content="57">
+        </div>
+      </div>
+
+	  <header class="post-header">
+	    <h1 class="post-title" itemprop="name headline">ELK 셋팅부터 알람까지</h1>
+	    
+	    <p class="post-meta"><time datetime="2020-01-16T00:00:00+09:00" itemprop="datePublished dateModified">Jan 16, 2020</time> • <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">이중석</span></span></p>
+	  </header>
+	
+	  <div class="post-content" itemprop="articleBody">
+	    <blockquote>
+  <p>안녕하세요. 저는 상품시스템팀에서 개발업무를 맡고 있는 이중석입니다.
+최근 팀 내에서 로그엔트리를 ELK 로 전환하고 필요한 알람을 셋팅하는 작업을 진행했습니다. 이 과정중 알람을 설정하는 부분이 어렵진 않지만 쉽지도 않았습니다.
+그 과정에서 알게된 것들이 다른분께 도움이 될까 싶어 글을 남깁니다.</p>
+</blockquote>
+
+<h2 id="elk로-로그-쌓아보기-feat-스프링-배치">ELK로 로그 쌓아보기 (feat. 스프링 배치)</h2>
+<h3 id="local-에서-elk-띄우기">Local 에서 ELK 띄우기</h3>
+<p>ELK 는 Docker Compose 를 사용하여 실행할 것이기 때문에 Docker 가 설치 안되신 분들은 설치해서 진행해 주세요. <a href="https://www.docker.com/">Docker 홈페이지</a><br />
+<a href="https://github.com/deviantony/docker-elk.git">DOCKER_ELK</a> 에서 git clone 명령어를 사용하여 프로젝트를 받습니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir ~/workspace
+cd ~/workspace
+git clone https://github.com/deviantony/docker-elk.git
+</code></pre></div></div>
+
+<p>docker-elk/logstash/pipeline/logstash.conf 파일을 다음과 같이 수정합니다.</p>
+<pre><code class="language-logstash">input {
+	tcp {
+		port =&gt; 5000
+		codec =&gt; json_lines
+	}
+}
+
+## Add your filters / logstash plugins configuration here
+
+output {
+	elasticsearch {
+		hosts =&gt; "elasticsearch:9200"
+		index =&gt; "logstash-20191218"
+		user =&gt; "elastic"
+		password =&gt; "changeme"
+	}
+}
+</code></pre>
+
+<p>그후 docker-compose up 명령어를 통하여 ELK 를 실행합니다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd ~/workspace/docker-elk
+docker-compose up
+</code></pre></div></div>
+
+<h3 id="spring-batch-로그-elk-로-전송하기">Spring Batch 로그 ELK 로 전송하기</h3>
+<p>이제 어디에선가 ELK 로 로그를 전송해야 kibana 에서 확인이 가능할텐데요. 로그를 생성하고 ELK 로 전송할 배치를 만들도록 하겠습니다.</p>
+
+<p><a href="https://start.spring.io/">Spring Initializr</a> 으로 접속하여 Dependency 에 <strong>Spring Batch, Lombok, H2 Database</strong> 를 추가하고 Generate 버튼을 눌러 프로젝트를 생성합니다.</p>
+
+<p>DemoApplication class 에 @EnableBatchProcessing 을 추가해줍니다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@EnableBatchProcessing</span>
+<span class="nd">@SpringBootApplication</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DemoApplication</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="nc">DemoApplication</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<p>HelloBatchConfig.java 파일을 생성후 아래와 같이 작성합니다.
+<code class="language-plaintext highlighter-rouge">Hello Job Batch Log {}</code> info 로그를 100번 출력 하는 배치 입니다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Slf4j</span>
+<span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloBatchConfig</span> <span class="o">{</span>
+
+	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">JobBuilderFactory</span> <span class="n">jobBuilderFactory</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">StepBuilderFactory</span> <span class="n">stepBuilderFactory</span><span class="o">;</span>
+
+	<span class="nd">@Autowired</span>
+	<span class="kd">public</span> <span class="nf">HelloBatchConfig</span><span class="o">(</span><span class="nc">JobBuilderFactory</span> <span class="n">jobBuilderFactory</span><span class="o">,</span>
+	                        <span class="nc">StepBuilderFactory</span> <span class="n">stepBuilderFactory</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">jobBuilderFactory</span> <span class="o">=</span> <span class="n">jobBuilderFactory</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">stepBuilderFactory</span> <span class="o">=</span> <span class="n">stepBuilderFactory</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Bean</span>
+	<span class="kd">public</span> <span class="nc">Job</span> <span class="nf">helloJob</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">jobBuilderFactory</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"HelloJob"</span><span class="o">)</span>
+				<span class="o">.</span><span class="na">start</span><span class="o">(</span><span class="n">step</span><span class="o">())</span>
+				<span class="o">.</span><span class="na">build</span><span class="o">();</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Bean</span>
+	<span class="kd">public</span> <span class="nc">Step</span> <span class="nf">step</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">stepBuilderFactory</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"HelloJobTaskletStep"</span><span class="o">).</span><span class="na">tasklet</span><span class="o">(</span>
+				<span class="o">(</span><span class="nc">StepContribution</span> <span class="n">contribution</span><span class="o">,</span> <span class="nc">ChunkContext</span> <span class="n">chunkContext</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
+					<span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"==== Tasklet called...."</span><span class="o">);</span>
+
+					<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span><span class="mi">100</span><span class="o">;</span> <span class="n">i</span> <span class="o">++)</span> <span class="o">{</span>
+						<span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"Hello Job Batch Log {}"</span><span class="o">,</span> <span class="n">i</span><span class="o">);</span>
+					<span class="o">}</span>
+
+					<span class="k">return</span> <span class="nc">RepeatStatus</span><span class="o">.</span><span class="na">FINISHED</span><span class="o">;</span>
+				<span class="o">}).</span><span class="na">build</span><span class="o">();</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>다음은 배치에서 출력되는 로그를 Logstash 로 보내도록 설정하겠습니다.
+<a href="https://github.com/logstash/logstash-logback-encoder#tcp-appenders">이곳</a> 을 보면 tcp 통신을 통하여 바로 logstash 로 전송할 수 있는 appender 가 있습니다.</p>
+
+<p>해당 appender 를 사용하기 위하여 build.gradle 파일에 다음과 같이 dependency 를 추가해줍니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>compile 'net.logstash.logback:logstash-logback-encoder:6.3'
+</code></pre></div></div>
+
+<p>src/main/resources 디렉토리에 logback.xml 파일을 추가해 줍니다.</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;configuration&gt;</span>
+
+    <span class="nt">&lt;appender</span> <span class="na">name=</span><span class="s">"console"</span> <span class="na">class=</span><span class="s">"ch.qos.logback.core.ConsoleAppender"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;encoder</span> <span class="na">class=</span><span class="s">"ch.qos.logback.classic.encoder.PatternLayoutEncoder"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;pattern&gt;</span>%-5level %d{HH:mm:ss.SSS} [%thread] %logger{36} - %msg%n<span class="nt">&lt;/pattern&gt;</span>
+        <span class="nt">&lt;/encoder&gt;</span>
+    <span class="nt">&lt;/appender&gt;</span>
+
+    <span class="nt">&lt;appender</span> <span class="na">name=</span><span class="s">"stash"</span> <span class="na">class=</span><span class="s">"net.logstash.logback.appender.LogstashTcpSocketAppender"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;destination&gt;</span>127.0.0.1:5000<span class="nt">&lt;/destination&gt;</span>
+
+        <span class="c">&lt;!-- encoder is required --&gt;</span>
+        <span class="nt">&lt;encoder</span> <span class="na">class=</span><span class="s">"net.logstash.logback.encoder.LogstashEncoder"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/appender&gt;</span>
+
+    <span class="nt">&lt;root</span> <span class="na">level=</span><span class="s">"INFO"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;appender-ref</span> <span class="na">ref=</span><span class="s">"console"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;appender-ref</span> <span class="na">ref=</span><span class="s">"stash"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/root&gt;</span>
+
+<span class="nt">&lt;/configuration&gt;</span>
+
+</code></pre></div></div>
+
+<p>마지막으로 같은 위치인 src/main/resources 디렉토리에 application.yml 파일을 추가하고 다음과 같이 수정합니다.</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">logging.config</span><span class="pi">:</span> <span class="s">classpath:logback.xml</span>
+</code></pre></div></div>
+
+<p>이제 배치를 실행하면 logstash로 로그를 전송합니다.</p>
+
+<h3 id="open-distro-설치하기">Open Distro 설치하기</h3>
+<p>Open Distro Alert 기능을 사용하여 알람을 구성해보도록 하겠습니다.</p>
+
+<p><a href="https://opendistro.github.io/for-elasticsearch-docs/docs/install/plugins/">Open Distro Standalone_Install</a> 문서를 참고하여 설치했습니다.</p>
+
+<h4 id="elasticsearch-에-open-distro-alert-설치">Elasticsearch 에 Open Distro Alert 설치</h4>
+<p>docker-elk/elasticsearch/Dockerfile 을 다음과 같이 수정합니다.</p>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">ARG</span><span class="s"> ELK_VERSION</span>
+
+<span class="k">FROM</span><span class="s"> docker.elastic.co/elasticsearch/elasticsearch:${ELK_VERSION}</span>
+<span class="k">RUN </span>elasticsearch-plugin <span class="nb">install</span> <span class="nt">-b</span> https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/opendistro-alerting/opendistro_alerting-1.3.0.1.zip
+</code></pre></div></div>
+
+<h4 id="kibana-에-open-distro-alert-설치">Kibana 에 Open Distro Alert 설치</h4>
+<p>docker-elk/kibana/Dockerfile 을 다음과 같이 수정합니다.</p>
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">ARG</span><span class="s"> ELK_VERSION</span>
+
+<span class="k">FROM</span><span class="s"> docker.elastic.co/kibana/kibana:${ELK_VERSION}</span>
+<span class="k">RUN </span>kibana-plugin <span class="nb">install </span>https://d3g5vo6xdbdb9a.cloudfront.net/downloads/kibana-plugins/opendistro-alerting/opendistro-alerting-1.3.0.0.zip
+</code></pre></div></div>
+
+<h4 id="elk-랑-open-distro-alert-버전-맞추기">ELK 랑 Open Distro Alert 버전 맞추기</h4>
+<p>현재 opendistro_alert의 최신버전인 1.3.0.1 버전 에서 지원하는 elasticsearch 버전은 7.3.2 버전입니다.
+docker-elk/.env 파일에서 elk 버전을 7.3.2 로 수정합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ELK_VERSION=7.3.2
+</code></pre></div></div>
+
+<h4 id="x-pack-설정-off-하기">X-PACK 설정 Off 하기</h4>
+<p>docker-elk/elastic/config/elasticsearch.yml 파일에서 xpack 관련 설정을 false 로 변경합니다. 
+(해당 설정을 false 로 변경하지 않으면 opendistro_alert 을 사용할때 인증 관련 에러가 발생합니다)</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">xpack.security.enabled</span><span class="pi">:</span> <span class="no">false</span>
+<span class="s">xpack.monitoring.collection.enabled</span><span class="pi">:</span> <span class="no">false</span>
+</code></pre></div></div>
+
+<h4 id="새로운-이미지-build-하고-재실행하기">새로운 이미지 Build 하고 재실행하기</h4>
+<p>새로 Docker 이미지를 빌드한 후, 이전 버전에서 사용된 elasticsearch volume 을 제거하고<br />
+다시 컨테이너를 실행합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose build
+docker volume rm docker-elk_elasticsearch
+docker-compose up
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h4 id="kibana-가-정상-실행되지-않는다면">Kibana 가 정상 실행되지 않는다면?</h4>
+<p>혹시 Open Distro 설치 후, 다음과 같은 로그가 올라오면서 kibana 가 정상적으로 실행되지 않는다면 <br />
+메모리 용량을 증가시키고 다시 실행해 보시기 바랍니다.</p>
+
+<p>로그</p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code> {"type":"log","@timestamp":"2020-01-13T05:55:05Z","tags":["info","optimize"],"pid":1,"message":"Optimizing and caching bundles for space_selector, dashboardViewer, apm, code, maps, canvas, infra, siem, uptime, opendistro-alerting, kibana, stateSessionStorageRedirect, status_page and timelion. This may take a few minutes"}
+Browserslist: caniuse-lite is outdated. Please run next command `npm update caniuse-lite browserslist`
+Browserslist: caniuse-lite is outdated. Please run next command `npm update caniuse-lite browserslist`
+Browserslist: caniuse-lite is outdated. Please run next command `npm update caniuse-lite browserslist`
+</code></pre></div></div>
+<p><br /></p>
+
+<p>docker-compose.yml 파일 에서 kibana 메모리 용량 지정(environment: NODE_OPTIONS 추가)</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">kibana</span><span class="pi">:</span>
+    <span class="na">build</span><span class="pi">:</span>
+      <span class="na">context</span><span class="pi">:</span> <span class="s">kibana/</span>
+      <span class="na">args</span><span class="pi">:</span>
+        <span class="na">ELK_VERSION</span><span class="pi">:</span> <span class="s">$ELK_VERSION</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">bind</span>
+        <span class="na">source</span><span class="pi">:</span> <span class="s">./kibana/config/kibana.yml</span>
+        <span class="na">target</span><span class="pi">:</span> <span class="s">/usr/share/kibana/config/kibana.yml</span>
+        <span class="na">read_only</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">5601:5601"</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="na">NODE_OPTIONS</span><span class="pi">:</span> <span class="s2">"</span><span class="s">--max-old-space-size=2048"</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">elk</span>
+    <span class="na">depends_on</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">elasticsearch</span>
+</code></pre></div></div>
+
+<p><br />
+아래 화면과 같이 kibana 좌측 메뉴에 A라 표시된 메뉴가 보인다면 성공입니다.</p>
+
+<p><img src="https://woowabros.github.io/img/2020-01-16/opendistro_install_success.png" alt="0" /></p>
+
+<p><br /></p>
+
+<h2 id="우리팀은-이렇게-사용합니다">우리팀은 이렇게 사용합니다.</h2>
+<h3 id="배치-관련-알람-설정">배치 관련 알람 설정</h3>
+<p>제가 속한 상품시스템팀에서는 광고데이터 생성, 결제 데이터 생성, 결제 시도 등등 매일 정해진 시간에 수행되어야 하는 배치들이 있습니다.
+이 수많은 배치들이 정해진 시간에 정상적으로 수행했는지 매번 확인하기 힘들어서 알람을 설정해 두었습니다.
+<br /> 
+알람을 설정할때는 Monitor, Trigger, Destination 를 설정해주셔야 합니다.</p>
+<h4 id="배치가-실패했습니다배치-에러-로그-모니터링하기">배치가 실패했습니다!(배치 에러 로그 모니터링하기)</h4>
+<h5 id="destination-설정">Destination 설정</h5>
+<p>배치 실행중 Exception 이 발생하면 Slack 으로 메시지를 보내도록 Destination 을 먼저 셋팅합니다.
+아래 화면에서 보이는 Add Destination 버튼을 눌러 Destination 생성 화면으로 이동합니다.
+<img src="https://woowabros.github.io/img/2020-01-16/destination_create_button.png" alt="0" /></p>
+
+<p>아래 화면에서 처럼 destination 이름, type, slack webhook url 을 입력하여 생성하시면 됩니다.<br />
+<img src="https://woowabros.github.io/img/2020-01-16/destination_create_view.png" alt="0" /></p>
+
+<h5 id="monitor-설정">Monitor 설정</h5>
+<p>아래 화면에서 Create Monitor 버튼을 눌러서 Monitor 생성 화면으로 이동합니다.
+<img src="https://woowabros.github.io/img/2020-01-16/opendistro_monitor_create_button.png" alt="0" /></p>
+
+<p><br /></p>
+
+<p>모니터 생성 화면으로 들어가서 Monitor 이름을 입력하고 스크롤을 조금 내리면 <code class="language-plaintext highlighter-rouge">Define Monitor</code> 화면이 중간쯤에 나타납니다.
+이 화면에서 Define using extraction query 를 선택하고, 로그를 조회할  index를 선택한 후, 어떤 쿼리로 조회할지 입력합니다.
+<br />
+<br />
+스크린샷의 우측 상단에 보이는 RUN 버튼을 누르면 쿼리조회결과를 확인 할 수 있습니다.<br />
+저는 현재시간부터 2분 이내에 들어온 Log Level 이 ERROR 인 로그를 조회하도록 쿼리를 입력했습니다.
+<img src="https://woowabros.github.io/img/2020-01-16/monitor_create_view_define.png" alt="0" /></p>
+
+<p><br /></p>
+
+<p>마지막으로 제일 하단에 있는 Monitor Schedule 을 셋팅하고 Create 버튼으로 Monitor 를 생성합니다.<br />
+화면에서는 <code class="language-plaintext highlighter-rouge">By interval</code> 로 1분마다 조회하도록 셋팅하였습니다. 이 외에도 <code class="language-plaintext highlighter-rouge">Daily</code> <code class="language-plaintext highlighter-rouge">Weekly</code> <code class="language-plaintext highlighter-rouge">Monthly</code> <code class="language-plaintext highlighter-rouge">Custom Cron Expression</code> 등으로 셋팅할 수도 있습니다. 
+<img src="https://woowabros.github.io/img/2020-01-16/monitor_create_view_interval.png" alt="0" /></p>
+
+<h5 id="trigger-설정">Trigger 설정</h5>
+<p>Monitor 를 생성하면 바로 Trigger 생성 화면으로 넘어옵니다. <br />
+Trigger Name 을 입력하고 Trigger Condition 항목을 셋팅합니다. 기본셋팅은</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ctx.results[0].hits.total.value &gt; 0
+</code></pre></div></div>
+<p>이렇게 입력되어 있습니다.
+저는 에러로그가 1개 이상 발생하면 알람을 받고 싶기 때문에 따로 수정하지 않겠습니다.
+<br />
+<br />
+마지막으로 trigger 생성 화면 제일 하단에 있는 Configure Action 부분을 셋팅합니다.
+Action Name 을 입력하고 아까 생성한 Destination 을 선택합니다. Message 와 Message Preview 필드 중간에 있는 <code class="language-plaintext highlighter-rouge">Send test Message</code> 버튼을 눌러서 Slack 으로 메시지가 오는지 확인후 Trigger를 생성합니다.
+<img src="https://woowabros.github.io/img/2020-01-16/trigger_configure_action.png" alt="0" /></p>
+
+<p><br />
+<br />
+셋팅이 완료되었습니다!<br />
+배치에서 Exception을 발생하도록 수정하고 실행해보세요.
+Slack 으로 알람이 온다면 성공입니다.</p>
+
+<h4 id="배치-실행은-했니정해진-시간에-배치-실행여부-모니터링-하기">배치 실행은 했니?(정해진 시간에 배치 실행여부 모니터링 하기)</h4>
+<p>배치가 실패하면 알람이 오도록 셋팅을 했지만, 배치가 어떠한 이유에서든 실행이 되지 않으면 인지할 수가 없습니다. 배치가 정상적으로 실행되지 않았을때 알람이 오도록 셋팅을 하겠습니다.</p>
+<h5 id="destination-설정-1">Destination 설정</h5>
+<p>Destination 설정은 위와 같습니다.</p>
+
+<h5 id="monitor-설정-1">Monitor 설정</h5>
+<p>Monitor 설정 전에, 배치가 실행을 완료하면 “테스트 배치 완료!” 라는 로그를 남기도록 코드를 추가합니다. <br />
+Monitor Name 을 “Hello Batch 실행여부 확인” 으로 입력하고, Define Monitor 의 Define extraction query 부분을 다음과 같이 작성합니다.</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"@timestamp"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                            </span><span class="nl">"from"</span><span class="p">:</span><span class="w"> </span><span class="s2">"||-1h"</span><span class="p">,</span><span class="w">
+                            </span><span class="nl">"to"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                            </span><span class="nl">"include_lower"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                            </span><span class="nl">"include_upper"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                            </span><span class="nl">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"epoch_millis"</span><span class="p">,</span><span class="w">
+                            </span><span class="nl">"boost"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+                        </span><span class="p">}</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"match"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"테스트 배치 완료!"</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nl">"adjust_pure_negative"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"boost"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+<p>그리고 Monitor Schedule 을 배치가 완료되는 시간보다 미래시간을 cron expression 으로 셋팅합니다. <br />
+저는 7시 20분으로 설정했습니다.
+<img src="https://woowabros.github.io/img/2020-01-16/monitor_create_view_interval2.png" alt="0" /></p>
+
+<h5 id="trigger-설정-1">Trigger 설정</h5>
+<p>모니터링한 시간에 조회되지 않으면 알람을 보내도록 하기 위해서 Trigger condition 조건을</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ctx.results[0].hits.total.value &lt; 1
+</code></pre></div></div>
+<p>으로 셋팅합니다.
+나머지는 배치 에러 트리거 설정과 같습니다.</p>
+
+<p>이런식으로 해당 시간에 배치가 실행되지 않았을때, 알람이 오도록 셋팅할 수 있습니다.</p>
+
+<h3 id="슬랙메시지에-링크추가해서-바로-이동하기">슬랙메시지에 링크추가해서 바로 이동하기</h3>
+<p>슬랙 메시지에 에러 로그를 바로 확인할 수 있는 링크를 추가하면 좀더 편리하게 에러로그를 확인할 수 있습니다.
+kibana 우측 메뉴중 가장 상단에 있는 Discover 메뉴로 이동합니다. <br /></p>
+
+<p>filter 에 “level:ERROR” 을 추가하고 시간을 “Last 2 minutes” 으로 설정하고 조회합니다. 그러면 상단의 url 이 변경되는데 이 url 복사합니다.
+<img src="https://woowabros.github.io/img/2020-01-16/discover_url_copy.png" alt="0" /></p>
+
+<p>아까 생성한 “배치에 에러로그가 올라온 경우”를 확인하는 Monitor 의 Trigger 수정화면으로 이동합니다.<br />
+Configure actions 부분의 Message 에 아래와 같이 추가합니다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Link: &lt;위에서 복사한 url|로그보러 가기&gt;
+</code></pre></div></div>
+
+<p>이렇게 하면 슬랙으로 메시지가 왔을때, 바로 링크를 눌러서 kibana 조회 화면으로 이동할 수 있습니다.</p>
+
+<h3 id="링크-길이-줄이기">링크 길이 줄이기</h3>
+<p>위에서는 조회 조건이 얼마 없어서 링크가 길지 않습니다. 하지만 조건에 조금만 추가되어도 링크가 매우 길어지게 되서 셋팅할때 은근히 방해가 됩니다. 
+이때 조회 조건을 저장하면 링크를 줄일 수 있습니다.<br />
+다시 Discover 메뉴로 이동한 후에 조회하고 싶은 조건들을 입력합니다. 그 후에 filter 위에 있는 save 버튼을 눌러서 조회 조건을 저장합니다. 저장된 값은 Open 버튼을 누르면
+확인할 수 있습니다. 이 상태에서 url 을 확인하면 길이가 줄어든 것을 확인할 수 있습니다.
+<br />
+<br />
+조회결과 저장 이전화면
+<img src="https://woowabros.github.io/img/2020-01-16/discover_save_before.png" alt="0" /></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>저장 이전 Url
+http://localhost:5601/app/kibana#/discover?_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-2m,to:now))&amp;_a=(columns:!(_source),filters:!(),index:ad592d20-368e-11ea-86a8-3790198afce8,interval:auto,query:(language:kuery,query:'level:ERROR'),sort:!('@timestamp',desc))
+</code></pre></div></div>
+
+<p>조회결과 저장 이후화면
+<img src="https://woowabros.github.io/img/2020-01-16/discover_save_after.png" alt="0" /></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>저장 이후 Url
+http://localhost:5601/app/kibana#/discover/5da5dab0-3785-11ea-91df-1764d109c41c
+</code></pre></div></div>
+<p>이뿐만 아니라 자주보는 조건을 저장하고 조회하기에도 유용합니다.</p>
+
+<p><br />
+<br /></p>
+
+<p>지금까지 로컬에서 elk 를 셋팅해보고 팀에서 알람을 셋팅하면서 알게된 소소합 팁들을 정리해봤습니다. 알람을 셋팅하려는 분들께 도움이 되기를 바라며 더욱 멋지게 사용할 수 있는 방법을 알게되면 추가하도록 하겠습니다.
+<br />
+<br />
+읽어주셔서 감사합니다!</p>
+
+	  </div>
+	  
+    <div class="fb-comments"
+         data-href="http://woowabros.github.io/experience/2020/01/16/set-elk-with-alarm.html" data-width="100%" data-numposts="10"></div>
+    
+	  <a href="/" class="btn btn-block" id="back">목록으로 돌아가기</a>
+	
+  </article>
+  <a href="https://www.woowahan.com/#/recruit/tech" class="sub-banner"></a>
+</section>
+
+<script>
+	var goback = document.getElementById("back");
+    goback.addEventListener('click', function(event) {
+        window.history.back();
+        event.stopPropagation();
+    });
+</script>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+    © Woowabros. All rights reserved. Powered by GitHub Pages.
+  </div>
+
+</footer>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  //ga('create', 'UA-77115139-1', 'auto');
+  ga('create', 'UA-167267783-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+  </body>
+
+</html>
+
